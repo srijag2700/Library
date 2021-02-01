@@ -13,9 +13,9 @@ public class Date {
             dateNumbers[index] = Integer.parseInt(split.nextToken()); // allowed to use Integer.parseInt?
             index++;
         }
-        this.year = dateNumbers[3];
-        this.month = dateNumbers[1];
-        this.day = dateNumbers[2];
+        this.year = dateNumbers[2];
+        this.month = dateNumbers[0];
+        this.day = dateNumbers[1];
     } //taking mm/dd/yyyy and create a Date object
     public Date() {
         Calendar today = Calendar.getInstance();
