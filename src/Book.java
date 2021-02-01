@@ -11,7 +11,7 @@ public class Book {
         this.datePublished = datePublished;
     }
 
-    private String getNumber() {
+    public String getNumber() {
         return number;
     }
 
