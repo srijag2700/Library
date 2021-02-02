@@ -41,7 +41,11 @@ public class Library {
         // numbooks always points to next empty spot -- use this as index
         // increment numBooks by one
 
-        int newSerialNumber = STARTING_SERIAL_NUMBER + numBooks;
+        int newSerialNumber = STARTING_SERIAL_NUMBER;
+        if (numBooks > 0) {
+            newSerialNumber = findHighestSerialNumber();
+        }
+
         book.setNumber(Integer.toString(newSerialNumber));
 
         if (numBooks == books.length) {
@@ -114,7 +118,7 @@ public class Library {
         }
     }
     // finding the most recent serial number in array
-    private int findingHighestSerialNumber() {
+    private int findHighestSerialNumber() {
         int largestSerialNumber = 0;
         for (int i = 0; i < books.length; i++) {
             int currSerialNumber = Integer.parseInt(books[i].getNumber());
