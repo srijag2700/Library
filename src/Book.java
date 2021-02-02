@@ -11,8 +11,20 @@ public class Book {
         this.datePublished = datePublished;
     }
 
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public String getNumber() {
         return number;
+    }
+
+    public boolean getCheckedOut() {
+        return checkedOut;
+    }
+
+    public void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
     }
 
     @Override
