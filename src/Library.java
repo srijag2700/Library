@@ -53,7 +53,8 @@ public class Library {
     }
 
     public boolean remove(Book book) {
-
+        //
+        int bookLocation = findBySerialNumber(book.getNumber());
     }
 
     public boolean checkOut(Book book) {
@@ -71,7 +72,12 @@ public class Library {
     }
 
     public boolean returns(Book book) {
-
+        int bookLocation = find(book);
+        if (bookLocation != NOT_FOUND && book.getCheckedOut()) {
+            book.setCheckedOut(false);
+            return true;
+        }
+        return false;
     }
 
     public void print() {
@@ -95,7 +101,7 @@ public class Library {
         System.out.println("**End of list.");
     } //print the list of books by number (ascending)
 
-    private Book[] insertionSort() {
+    private void insertionSort() {
         for (int i = 0; i < books.length; i++) {
             Book currBook = books[i];
             int currNumber = Integer.parseInt(currBook.getNumber());
@@ -107,4 +113,25 @@ public class Library {
             books[j+1] = currBook;
         }
     }
+    // finding the most recent serial number in array
+    private int findingHighestSerialNumber() {
+        int largestSerialNumber = 0;
+        for (int i = 0; i < books.length; i++) {
+            int currSerialNumber = Integer.parseInt(books[i].getNumber());
+            if (largestSerialNumber < currSerialNumber) {
+                largestSerialNumber = currSerialNumber;
+            }
+        }
+        return largestSerialNumber;
+    }
+
+    private int findBySerialNumber(String serialNumber) {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i].getNumber().equals(serialNumber)) {
+                return i; // returns index of book
+            }
+        }
+        return NOT_FOUND;
+    }
+
 }
