@@ -2,6 +2,7 @@ public class Library {
     private Book[] books; // array-based implementation of the bag data structure
     private int numBooks; // the number of books currently in the bag
     private final static int STARTING_SERIAL_NUMBER = 10001;
+    private final static int NOT_FOUND = -1;
 
     public Library() {
         this.books = new Book[4];
@@ -14,7 +15,7 @@ public class Library {
                 return i; // returns index of book
             }
         }
-        return -1;
+        return NOT_FOUND;
     } // helper method to find a book in the bag
 
     private void grow() {
@@ -60,7 +61,7 @@ public class Library {
         // if book not in library OR its checked out, return false
 
         int bookLocation = find(book);
-        if (bookLocation != -1 && book.getCheckedOut() == false) {
+        if (bookLocation != NOT_FOUND && book.getCheckedOut() == false) {
             book.setCheckedOut(true);
             return true;
         }
