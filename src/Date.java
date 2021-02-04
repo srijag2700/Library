@@ -1,7 +1,7 @@
 import java.util.Calendar;
 import java.util.StringTokenizer;
 
-public class Date {
+public class Date implements Comparable{
     private int year;
     private int month;
     private int day;
@@ -17,6 +17,7 @@ public class Date {
         this.month = dateNumbers[0];
         this.day = dateNumbers[1];
     } //taking mm/dd/yyyy and create a Date object
+
     public Date() {
         Calendar today = Calendar.getInstance();
         this.year = today.get(Calendar.YEAR); // test?
@@ -38,6 +39,48 @@ public class Date {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        Date objDate = (Date) obj;
+        if (year > objDate.getYear()) {
+            return 1;
+        }
+        else if (year < objDate.getYear()) {
+            return -1;
+        }
+        else {
+            if (month > objDate.getMonth()) {
+                return 1;
+            }
+            else if (month < objDate.getMonth()) {
+                return -1;
+            }
+            else {
+                if (day > objDate.getDay()) {
+                    return 1;
+                }
+                else if (day < objDate.getDay()) {
+                    return -1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        }
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getDay() {
+        return day;
     }
 
     public static void main(String[] args) {

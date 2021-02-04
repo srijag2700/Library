@@ -57,8 +57,8 @@ public class Library {
     }
 
     public boolean remove(Book book) {
-        //
-        int bookLocation = findBySerialNumber(book.getNumber());
+        int bookIndex = find(book);
+        // do the shifty thing
     }
 
     public boolean checkOut(Book book) {
@@ -93,19 +93,24 @@ public class Library {
     } //print the list of books in the bag
 
     public void printByDate() {
-
+        insertionSortByDate();
+        System.out.println("**List of books by the dates published.");
+        for (int i = 0; i < books.length; i++) {
+            System.out.println(books[i]);
+        }
+        System.out.println("**End of list.");
     } //print the list of books by datePublished (ascending)
 
     public void printByNumber() {
-        Book[] booksSortedByNumber = insertionSort();
+        insertionSortByNumber();
         System.out.println("**List of books by the book numbers.");
-        for (int i = 0; i < booksSortedByNumber.length; i++) {
+        for (int i = 0; i < books.length; i++) {
             System.out.println(books[i]);
         }
         System.out.println("**End of list.");
     } //print the list of books by number (ascending)
 
-    private void insertionSort() {
+    private void insertionSortByNumber() {
         for (int i = 0; i < books.length; i++) {
             Book currBook = books[i];
             int currNumber = Integer.parseInt(currBook.getNumber());
@@ -117,6 +122,20 @@ public class Library {
             books[j+1] = currBook;
         }
     }
+
+    private void insertionSortByDate() {
+        for (int i = 0; i < books.length; i++) {
+            Book currBook = books[i];
+            Date currDate = currBook.getDatePublished();
+            int j = i - 1;
+            while (j >= 0 && currDate.compareTo(books[j].getDatePublished()) == -1) {
+                books[j+1] = books[j];
+                j--;
+            }
+            books[j+1] = currBook;
+        }
+    }
+
     // finding the most recent serial number in array
     private int findHighestSerialNumber() {
         int largestSerialNumber = 0;
@@ -129,6 +148,7 @@ public class Library {
         return largestSerialNumber;
     }
 
+    /*
     private int findBySerialNumber(String serialNumber) {
         for (int i = 0; i < books.length; i++) {
             if (books[i].getNumber().equals(serialNumber)) {
@@ -137,5 +157,6 @@ public class Library {
         }
         return NOT_FOUND;
     }
+    */
 
 }

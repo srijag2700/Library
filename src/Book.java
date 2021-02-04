@@ -19,6 +19,10 @@ public class Book {
         return number;
     }
 
+    public Date getDatePublished() {
+        return datePublished;
+    }
+
     public boolean getCheckedOut() {
         return checkedOut;
     }
