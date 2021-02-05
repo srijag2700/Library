@@ -25,6 +25,7 @@ public class Date implements Comparable{
         this.day = today.get(Calendar.DAY_OF_MONTH);
     } //create an object with today’s date (see Calendar class)
 
+    // TODO: validate months, and look into 3/30/2021 being accepted
     public boolean isValid() {
         Calendar currentDate = Calendar.getInstance();
         int currentYear = currentDate.get(Calendar.YEAR);
@@ -81,6 +82,11 @@ public class Date implements Comparable{
 
     public int getDay() {
         return day;
+    }
+
+    @Override
+    public String toString() {
+        return month + "/" + day + "/" + year;
     }
 
     public static void main(String[] args) {

@@ -41,12 +41,14 @@ public class Library {
         // numbooks always points to next empty spot -- use this as index
         // increment numBooks by one
 
-        int newSerialNumber = STARTING_SERIAL_NUMBER;
-        if (numBooks > 0) {
-            newSerialNumber = findHighestSerialNumber();
-        }
 
-        book.setNumber(Integer.toString(newSerialNumber));
+        if (numBooks == 0) {
+            book.setNumber("" + STARTING_SERIAL_NUMBER);
+        }
+        else {
+            int newSerialNumber = findHighestSerialNumber() + 1;
+            book.setNumber(Integer.toString(newSerialNumber));
+        }
 
         if (numBooks == books.length) {
             grow();
@@ -58,7 +60,19 @@ public class Library {
 
     public boolean remove(Book book) {
         int bookIndex = find(book);
-        // do the shifty thing
+        if (bookIndex == NOT_FOUND) {
+            return false;
+        }
+
+        Book[] tempBooks = new Book[books.length-1];
+        for (int i = 0, j = 0; i < books.length; i++) {
+            if (!books[i].equals(book)) {
+                tempBooks[j++] = books[i];
+            }
+        }
+        books = tempBooks;
+        numBooks--;
+        return true;
     }
 
     public boolean checkOut(Book book) {
@@ -66,33 +80,51 @@ public class Library {
         // if book not in library OR its checked out, return false
 
         int bookLocation = find(book);
-        if (bookLocation != NOT_FOUND && book.getCheckedOut() == false) {
-            book.setCheckedOut(true);
-            return true;
-        }
-        else {
+        if (bookLocation == NOT_FOUND) {
             return false;
         }
+
+        Book currentBook = books[bookLocation];
+        if (currentBook.getCheckedOut() == false) {
+            currentBook.setCheckedOut(true);
+            return true;
+        }
+        return false;
     }
 
     public boolean returns(Book book) {
         int bookLocation = find(book);
-        if (bookLocation != NOT_FOUND && book.getCheckedOut()) {
-            book.setCheckedOut(false);
+        if (bookLocation == NOT_FOUND) {
+            return false;
+        }
+
+        Book currentBook = books[bookLocation];
+        if (currentBook.getCheckedOut()) {
+            currentBook.setCheckedOut(false);
             return true;
         }
         return false;
     }
 
     public void print() {
+        if (numBooks == 0) {
+            System.out.println("Library catalog is empty!");
+            return;
+        }
         System.out.println("**List of books in the library.");
         for (int i = 0; i < books.length; i++) {
-            System.out.println(books[i]);
+            if (books[i] != null) {
+                System.out.println(books[i]);
+            }
         }
         System.out.println("**End of list.");
     } //print the list of books in the bag
 
     public void printByDate() {
+        if (numBooks == 0) {
+            System.out.println("Library catalog is empty!");
+            return;
+        }
         insertionSortByDate();
         System.out.println("**List of books by the dates published.");
         for (int i = 0; i < books.length; i++) {
@@ -102,6 +134,10 @@ public class Library {
     } //print the list of books by datePublished (ascending)
 
     public void printByNumber() {
+        if (numBooks == 0) {
+            System.out.println("Library catalog is empty!");
+            return;
+        }
         insertionSortByNumber();
         System.out.println("**List of books by the book numbers.");
         for (int i = 0; i < books.length; i++) {
@@ -123,6 +159,7 @@ public class Library {
         }
     }
 
+    // TODO: handle books with same date -- sort those alphabetically
     private void insertionSortByDate() {
         for (int i = 0; i < books.length; i++) {
             Book currBook = books[i];
@@ -140,9 +177,11 @@ public class Library {
     private int findHighestSerialNumber() {
         int largestSerialNumber = 0;
         for (int i = 0; i < books.length; i++) {
-            int currSerialNumber = Integer.parseInt(books[i].getNumber());
-            if (largestSerialNumber < currSerialNumber) {
-                largestSerialNumber = currSerialNumber;
+            if (books[i] != null) {
+                int currSerialNumber = Integer.parseInt(books[i].getNumber());
+                if (largestSerialNumber < currSerialNumber) {
+                    largestSerialNumber = currSerialNumber;
+                }
             }
         }
         return largestSerialNumber;

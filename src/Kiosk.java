@@ -29,11 +29,19 @@ public class Kiosk {
                 else {
                     Book newBook = new Book("0", newBookTitle, false, newBookDatePublished);
                     lib.add(newBook);
+                    System.out.println(newBookTitle + " was added to the library.");
                 }
             }
             else if (command.equals("R")) {
                 //do remove
                 String serialNum = tokens[1];
+                Book tempBook = new Book(tokens[1], "0", false, new Date());
+                if (lib.remove(tempBook)) {
+                    System.out.println("Book#" + serialNum + " removed.");
+                }
+                else {
+                    System.out.println("Unable to remove, the library does not have this book.");
+                }
             }
             else if (command.equals("O")) {
                 //do check out
