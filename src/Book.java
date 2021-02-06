@@ -12,11 +12,11 @@ public class Book {
     private Date datePublished;
 
     /**
-     *
-     * @param number
-     * @param name
-     * @param checkedOut
-     * @param datePublished
+     * Initializes a new Book object with a given serial number, name, availability status, and publication date.
+     * @param number the serial number of the book
+     * @param name the title of the book
+     * @param checkedOut the checked-out status of the book (true if checked out, false otherwise)
+     * @param datePublished the publication date of the book
      */
     public Book(String number, String name, boolean checkedOut, Date datePublished) {
         this.number = number;
@@ -25,30 +25,60 @@ public class Book {
         this.datePublished = datePublished;
     }
 
+    /**
+     * Returns the name of the book.
+     * @return the name of the book
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the book's serial number.
+     * @param number the given serial number to assign to the book
+     */
     public void setNumber(String number) {
         this.number = number;
     }
 
+    /**
+     * Returns the book's serial number.
+     * @return the book's serial number
+     */
     public String getNumber() {
         return number;
     }
 
+    /**
+     * Returns the book's date of publication.
+     * @return the book's publication date
+     */
     public Date getDatePublished() {
         return datePublished;
     }
 
-    public boolean getCheckedOut() {
-        return checkedOut;
-    }
-
+    /**
+     * Sets the book's checked out status.
+     * @param checkedOut true if the book is checked out, false otherwise
+     */
     public void setCheckedOut(boolean checkedOut) {
         this.checkedOut = checkedOut;
     }
 
+    /**
+     * Returns the checked out status of the book.
+     * @return true if book is checked out, false otherwise
+     */
+    public boolean getCheckedOut() {
+        return checkedOut;
+    }
+
+    /**
+     * Compares current Book object to another Book object.
+     * Determines equality by checking if the serial numbers of both Books are equal.
+     * @param obj the book to compare to
+     * @return true if the two Books' serial numbers are equal, false otherwise
+     */
     @Override
     public boolean equals(Object obj){
         Book objBook = (Book) obj;
@@ -58,6 +88,10 @@ public class Book {
         return false;
     }
 
+    /**
+     * Returns a string representation of the book.
+     * @return string representation of the book.
+     */
     @Override
     public String toString() {
         //Book#10007::Design Patterns::5/30/1996::is available.

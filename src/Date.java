@@ -1,3 +1,9 @@
+/**
+ * The Date class is used to represent dates in the format mm/dd/yyyy.
+ * It also contains methods to validate a given date, and compare dates to each other.
+ * @author Srija Gottiparthi, Catherine Nguyen
+ */
+
 import java.util.Calendar;
 import java.util.StringTokenizer;
 
@@ -5,6 +11,11 @@ public class Date implements Comparable{
     private int year;
     private int month;
     private int day;
+
+    /**
+     * Initializes a new Date object with the given date.
+     * @param date the date given as a string in "mm/dd/yyyy" format
+     */
     public Date(String date) {
         StringTokenizer split = new StringTokenizer(date, "/");
         int [] dateNumbers = new int[3];
@@ -18,6 +29,9 @@ public class Date implements Comparable{
         this.day = dateNumbers[1];
     } //taking mm/dd/yyyy and create a Date object
 
+    /**
+     * Initializes a new default Date object with the current (today's) date.
+     */
     public Date() {
         Calendar today = Calendar.getInstance();
         this.year = today.get(Calendar.YEAR); // test?
@@ -25,6 +39,36 @@ public class Date implements Comparable{
         this.day = today.get(Calendar.DAY_OF_MONTH);
     } //create an object with today’s date (see Calendar class)
 
+    /**
+     * Returns the Date's year.
+     * @return the year
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
+     * Returns the Date's month.
+     * @return the month
+     */
+    public int getMonth() {
+        return month;
+    }
+
+    /**
+     * Returns the Date's day.
+     * @return the day
+     */
+    public int getDay() {
+        return day;
+    }
+
+    /**
+     * Checks if a date is valid.
+     * A date is valid if it is after 1900, on or before the current date, and meets all other common requirements of a date.
+     * (e.g. the month existing, leap years being handled correctly, etc.)
+     * @return true if the date is valid, false otherwise
+     */
     public boolean isValid() {
         Calendar currentDate = Calendar.getInstance();
         int currentYear = currentDate.get(Calendar.YEAR);
@@ -60,6 +104,14 @@ public class Date implements Comparable{
         return true;
     }
 
+    /**
+     * Compares current Date object to another Date object.
+     * If the current Date object occurs later in the future than the given Date object, 1 is returned.
+     * If the current Date object occurs earlier in the future than the given Date object, -1 is returned.
+     * If both Dates are the same, 0 is returned.
+     * @param obj the date to compare to
+     * @return -1 if the current Date object is earlier, 1 if the current Date is later, 0 if equal
+     */
     @Override
     public int compareTo(Object obj) {
         Date objDate = (Date) obj;
@@ -90,23 +142,19 @@ public class Date implements Comparable{
         }
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
+    /**
+     * Returns a string representation of the date.
+     * @return a string representation of the date
+     */
     @Override
     public String toString() {
         return month + "/" + day + "/" + year;
     }
 
+    /**
+     * Testbed main to verify that the isValid() method is functioning correctly.
+     * @param args the given arguments
+     */
     public static void main(String[] args) {
         Date date1 = new Date("01/00/2021");
         if (date1.isValid()) {

@@ -1,11 +1,20 @@
+/**
+ * The Kiosk class acts as a front-end for users to access the Library and interact with Books.
+ * Users can utilize all Library commands, including adding, removing, checking out, and returning their own books,
+ * and viewing the list of books in the library sorted by serial number, date published, or in the current order.
+ * @author Srija Gottiparthi, Catherine Nguyen
+ */
+
 import java.util.Scanner;
-//import java.util.StringTokenizer;
 
 public class Kiosk {
     Library lib = new Library();
     Scanner sc = new Scanner(System.in);
     String input = "";
 
+    /**
+     * Main method for the kiosk, which runs the instance.
+     */
     public void run() {
         System.out.println(("Library Kiosk running."));
         do {
