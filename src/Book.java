@@ -11,6 +11,10 @@ public class Book {
         this.datePublished = datePublished;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setNumber(String number) {
         this.number = number;
     }
