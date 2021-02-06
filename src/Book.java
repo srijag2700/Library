@@ -1,9 +1,23 @@
+/**
+ * This class represents a book in the library.
+ * A book includes fields such as a unique 5-digit automatically generated serial number, title, whether it
+ * is checked out, and its date of publication.
+ * @author Catherine Nguyen, Srija Gottiparthi
+ */
+
 public class Book {
     private String number; //a 5-digit serial number unique to the book
     private String name;
     private boolean checkedOut;
     private Date datePublished;
 
+    /**
+     *
+     * @param number
+     * @param name
+     * @param checkedOut
+     * @param datePublished
+     */
     public Book(String number, String name, boolean checkedOut, Date datePublished) {
         this.number = number;
         this.name = name;

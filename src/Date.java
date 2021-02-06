@@ -25,12 +25,30 @@ public class Date implements Comparable{
         this.day = today.get(Calendar.DAY_OF_MONTH);
     } //create an object with today’s date (see Calendar class)
 
-    // TODO: validate months, and look into 3/30/2021 being accepted
     public boolean isValid() {
         Calendar currentDate = Calendar.getInstance();
         int currentYear = currentDate.get(Calendar.YEAR);
+        int currentMonth = currentDate.get(Calendar.MONTH);
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
         int earliestValidYear = 1900;
-        if (year < earliestValidYear || year > currentYear) {
+        if (year < earliestValidYear) {
+            return false;
+        }
+        if (year > currentYear) {
+            return false;
+        }
+        else if (year == currentYear) {
+            if (month > currentMonth) {
+                return false;
+            }
+            else if (month == currentMonth) {
+                if (day > currentDay) {
+                    return false;
+                }
+            }
+        }
+        int numMonths = 12;
+        if (month > numMonths) {
             return false;
         }
         Calendar bookDate = Calendar.getInstance();
