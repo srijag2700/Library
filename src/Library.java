@@ -159,13 +159,14 @@ public class Library {
         }
     }
 
+    // TODO: handle books with same date -- sort those alphabetically
     private void insertionSortByDate() {
         for (int i = 0; i < books.length; i++) {
             Book currBook = books[i];
-            //String currTitle = books[i].getName();
+            String currTitle = books[i].getName();
             Date currDate = currBook.getDatePublished();
             int j = i - 1;
-            while (j >= 0 && currDate.compareTo(books[j].getDatePublished()) <= 0) {
+            while (j >= 0 && currDate.compareTo(books[j].getDatePublished()) <= -1) {
                 books[j+1] = books[j];
                 j--;
             }
