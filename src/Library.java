@@ -1,14 +1,31 @@
+/**
+ * The Library class is used to represent all of the current books in array format.
+ * It includes fields such as the list of books, number of books and starting serial number and
+ * methods such as growing the array, adding a book, removing a book, checking out a book, returning
+ * a book, printing the list of books in its current order, by date ascending and by serial number ascending.
+ * @author Srija Gottiparthi, Catherine Nguyen
+ */
+
 public class Library {
     private Book[] books; // array-based implementation of the bag data structure
     private int numBooks; // the number of books currently in the bag
     private final static int STARTING_SERIAL_NUMBER = 10001;
     private final static int NOT_FOUND = -1;
+    private final static int CAPACITY = 4;
 
+    /**
+     * Initializes a new Library object with array size of 4 and no books.
+     */
     public Library() {
-        this.books = new Book[4];
+        this.books = new Book[CAPACITY];
         numBooks = 0;
     } //default constructor to create an empty bag
 
+    /**
+     * Searches through the array iteratively of a given book.
+     * @param book
+     * @return index of book in array
+     */
     private int find(Book book) {
         for (int i = 0; i < books.length; i++) {
             if (books[i].equals(book)) {
@@ -18,9 +35,12 @@ public class Library {
         return NOT_FOUND;
     } // helper method to find a book in the bag
 
+    /**
+     * Increases the capacity of the library by four when it is full.
+     */
     private void grow() {
         int currentLength = books.length;
-        int newLength = currentLength + 4;
+        int newLength = currentLength + CAPACITY;
 
         Book[] tempBooks = new Book[newLength];
 
@@ -33,6 +53,10 @@ public class Library {
 
     } // helper method to grow the capacity by 4
 
+    /**
+     * Adds a book to the library.
+     * @param book given book to be added
+     */
     public void add(Book book) {
         // in kiosk, check date
         // generate serial number. constant + numBooks -> make this new STRING using toString
@@ -58,6 +82,11 @@ public class Library {
         numBooks++;
     }
 
+    /**
+     * Removes a book from the library.
+     * @param book given book to be removed
+     * @return true if book is able to be removed, false otherwise
+     */
     public boolean remove(Book book) {
         int bookIndex = find(book);
         if (bookIndex == NOT_FOUND) {
@@ -75,6 +104,11 @@ public class Library {
         return true;
     }
 
+    /**
+     * Checks out a book if it is in the library.
+     * @param book given book to be checked out
+     * @return true if book is able to be checked out, false otherwise
+     */
     public boolean checkOut(Book book) {
         // if book is in library (find) AND its not checked out, set checkedOut to true & return true
         // if book not in library OR its checked out, return false
@@ -92,6 +126,11 @@ public class Library {
         return false;
     }
 
+    /**
+     * Returns a book if it is in the library.
+     * @param book given book to be returned.
+     * @return true if book is able to be returned, false otherwise
+     */
     public boolean returns(Book book) {
         int bookLocation = find(book);
         if (bookLocation == NOT_FOUND) {
@@ -106,6 +145,9 @@ public class Library {
         return false;
     }
 
+    /**
+     * Prints the list of books in its current order.
+     */
     public void print() {
         if (numBooks == 0) {
             System.out.println("Library catalog is empty!");
@@ -120,6 +162,9 @@ public class Library {
         System.out.println("**End of list.");
     } //print the list of books in the bag
 
+    /**
+     * Prints the list of books sorted by their date published.
+     */
     public void printByDate() {
         if (numBooks == 0) {
             System.out.println("Library catalog is empty!");
@@ -133,6 +178,9 @@ public class Library {
         System.out.println("**End of list.");
     } //print the list of books by datePublished (ascending)
 
+    /**
+     * Prints the list of books by their serial number sorted.
+     */
     public void printByNumber() {
         if (numBooks == 0) {
             System.out.println("Library catalog is empty!");
@@ -146,6 +194,9 @@ public class Library {
         System.out.println("**End of list.");
     } //print the list of books by number (ascending)
 
+    /**
+     * Performs an insertion book on the books array to sort by serial number from lowest to highest.
+     */
     private void insertionSortByNumber() {
         for (int i = 0; i < books.length; i++) {
             Book currBook = books[i];
@@ -160,6 +211,10 @@ public class Library {
     }
 
     // TODO: handle books with same date -- sort those alphabetically
+
+    /**
+     * Performs an insertion sort on the books array to sort by date from earliest to latest.
+     */
     private void insertionSortByDate() {
         for (int i = 0; i < books.length; i++) {
             Book currBook = books[i];
@@ -175,7 +230,10 @@ public class Library {
         }
     }
 
-    // finding the most recent serial number in array
+    /**
+     * Finds the greatest serial number in the books array.
+     * @return largest serial number found
+     */
     private int findHighestSerialNumber() {
         int largestSerialNumber = 0;
         for (int i = 0; i < books.length; i++) {
@@ -188,16 +246,5 @@ public class Library {
         }
         return largestSerialNumber;
     }
-
-    /*
-    private int findBySerialNumber(String serialNumber) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getNumber().equals(serialNumber)) {
-                return i; // returns index of book
-            }
-        }
-        return NOT_FOUND;
-    }
-    */
 
 }
