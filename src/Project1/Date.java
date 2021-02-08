@@ -1,11 +1,13 @@
+package Project1;
+import java.util.Calendar;
+import java.util.StringTokenizer;
+
 /**
  * The Date class is used to represent dates in the format mm/dd/yyyy.
+ *
  * It also contains methods to validate a given date, and compare dates to each other.
  * @author Srija Gottiparthi, Catherine Nguyen
  */
-
-import java.util.Calendar;
-import java.util.StringTokenizer;
 
 public class Date implements Comparable{
     private int year;
