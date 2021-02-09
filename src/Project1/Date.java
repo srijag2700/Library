@@ -239,5 +239,14 @@ public class Date implements Comparable{
             System.out.println(date9.month + "/" + date9.day + "/" + date9.year +
                     " is not valid (expected result: is not valid)");
         }
+        Date date10 = new Date("31/01/2000");
+        if (date10.isValid()) {
+            System.out.println(date10.month + "/" + date10.day + "/" + date10.year +
+                    " is valid (expected result: is not valid)");
+        }
+        else {
+            System.out.println(date10.month + "/" + date10.day + "/" + date10.year +
+                    " is not valid (expected result: is not valid)");
+        }
     }
 }
