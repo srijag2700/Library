@@ -36,7 +36,7 @@ public class Date implements Comparable{
      */
     public Date() {
         Calendar today = Calendar.getInstance();
-        this.year = today.get(Calendar.YEAR); // test?
+        this.year = today.get(Calendar.YEAR);
         this.month = today.get(Calendar.MONTH);
         this.day = today.get(Calendar.DAY_OF_MONTH);
     } //create an object with today’s date (see Calendar class)
@@ -84,10 +84,10 @@ public class Date implements Comparable{
             return false;
         }
         else if (year == currentYear) {
-            if (month > currentMonth) {
+            if (month-1 > currentMonth) {
                 return false;
             }
-            else if (month == currentMonth) {
+            else if (month-1 == currentMonth) {
                 if (day > currentDay) {
                     return false;
                 }
