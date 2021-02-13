@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
  * @author Srija Gottiparthi, Catherine Nguyen
  */
 
-public class Date implements Comparable{
+public class Date implements Comparable<Date>{
     private int year;
     private int month;
     private int day;
@@ -111,30 +111,29 @@ public class Date implements Comparable{
      * If the current Date object occurs later in the future than the given Date object, 1 is returned.
      * If the current Date object occurs earlier in the future than the given Date object, -1 is returned.
      * If both Dates are the same, 0 is returned.
-     * @param obj the date to compare to
+     * @param date the date to compare to
      * @return -1 if the current Date object is earlier, 1 if the current Date is later, 0 if equal
      */
     @Override
-    public int compareTo(Object obj) {
-        Date objDate = (Date) obj;
-        if (year > objDate.getYear()) {
+    public int compareTo(Date date) {
+        if (year > date.getYear()) {
             return 1;
         }
-        else if (year < objDate.getYear()) {
+        else if (year < date.getYear()) {
             return -1;
         }
         else {
-            if (month > objDate.getMonth()) {
+            if (month > date.getMonth()) {
                 return 1;
             }
-            else if (month < objDate.getMonth()) {
+            else if (month < date.getMonth()) {
                 return -1;
             }
             else {
-                if (day > objDate.getDay()) {
+                if (day > date.getDay()) {
                     return 1;
                 }
-                else if (day < objDate.getDay()) {
+                else if (day < date.getDay()) {
                     return -1;
                 }
                 else {
